@@ -18,9 +18,9 @@ provider "aws" {
 # }
 
 
-# AMI is of Debian
+# AMI is of SUSE Linux
 resource "aws_instance" "myserver" {
-  ami = "ami-0b75f821522bcff85"
+  ami = "ami-0b12a86a613a04fc6"
   instance_type = "t2.micro"
 
   tags = {
