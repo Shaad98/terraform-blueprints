@@ -18,9 +18,9 @@ provider "aws" {
 # }
 
 
-# AMI is of Ubuntu
+# AMI is of Redhat
 resource "aws_instance" "myserver" {
-  ami = "ami-091138d0f0d41ff90"
+  ami = "ami-0fdfb4d987b63ae72"
   instance_type = "t2.micro"
 
   tags = {
