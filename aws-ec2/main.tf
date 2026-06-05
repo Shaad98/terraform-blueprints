@@ -17,9 +17,11 @@ provider "aws" {
 #   cidr_block = "10.0.0.0/16"
 # }
 
+
+# AMI is of Ubuntu
 resource "aws_instance" "myserver" {
-  ami = "ami-00e801948462f718a"
-  instance_type = "t2.nano"
+  ami = "ami-091138d0f0d41ff90"
+  instance_type = "t2.micro"
 
   tags = {
     Name = "MyWebServer"
