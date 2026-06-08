@@ -4,11 +4,21 @@ terraform {
         source = "hashicorp/aws"
         version = "~> 6.0"
     }
+
+      random = {
+      source  = "hashicorp/random"
+      version = "~> 3.9.0"
+    }
+
   }
 }
 
+resource "random_id" "random_id" {
+  byte_length = 8
+}
+
 resource "aws_s3_bucket" "my_bucket" {
-  bucket = "my-bucket-xyz928"
+  bucket = "my-bucket-${random_id.random_id.hex}"
 
 }
 
