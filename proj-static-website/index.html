@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shaad's Terraform Lab</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header>
+        <nav class="navbar">
+
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <span>Shaad's Terraform Lab</span>
+            </div>
+
+            <button id="themeButton">
+                🌙 Dark Mode
+            </button>
+
+        </nav>
+    </header>
+
+
+    <main>
+
+        <!-- =========================
+             HERO
+        ========================== -->
+
+        <section class="hero">
+
+            <div class="badge">
+                ☁️ AWS + TERRAFORM
+            </div>
+
+            <h1>
+                Hi, I'm <span>Shaad</span> 👋
+            </h1>
+
+            <h2>
+                Infrastructure as Code,
+                <br>
+                <strong>Built. Deployed. Automated.</strong>
+            </h2>
+
+            <p>
+                Welcome to my Terraform playground.
+                This website is part of my journey into AWS,
+                DevOps and Infrastructure as Code.
+            </p>
+
+            <button id="exploreButton" class="explore-btn">
+                🚀 Deploy Infrastructure
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             TERMINAL
+        ========================== -->
+
+        <section class="terminal-section">
+
+            <div class="terminal">
+
+                <div class="terminal-header">
+
+                    <div class="terminal-buttons">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <p>
+                        terraform@shaad-server:~
+                    </p>
+
+                </div>
+
+                <div id="terminalBody" class="terminal-body">
+
+                    <p>
+                        <span class="prompt">$</span>
+                        Waiting for deployment...
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             DEPLOYMENT STATUS
+        ========================== -->
+
+        <section class="deployment">
+
+            <h2>
+                Infrastructure Status
+            </h2>
+
+            <div class="status-card">
+
+                <div id="statusIcon" class="status-icon">
+                    ⚙️
+                </div>
+
+                <div class="status-content">
+
+                    <h3 id="statusTitle">
+                        Ready to Deploy
+                    </h3>
+
+                    <p id="statusText">
+                        Click the button above to start
+                        the Terraform deployment simulation.
+                    </p>
+
+                    <div class="progress-container">
+
+                        <div
+                            id="progressBar"
+                            class="progress-bar">
+                        </div>
+
+                    </div>
+
+                    <p id="progressText">
+                        0%
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             TECHNOLOGY CARDS
+        ========================== -->
+
+        <section class="cards">
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🏗️
+                </div>
+
+                <h3>
+                    Terraform
+                </h3>
+
+                <p>
+                    Infrastructure is defined and managed
+                    using Infrastructure as Code.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    ☁️
+                </div>
+
+                <h3>
+                    AWS
+                </h3>
+
+                <p>
+                    Cloud infrastructure provisioned
+                    using Amazon Web Services.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🌐
+                </div>
+
+                <h3>
+                    Static Website
+                </h3>
+
+                <p>
+                    HTML, CSS and JavaScript running
+                    as a lightweight web application.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             FUN FACT
+        ========================== -->
+
+        <section class="fun-section">
+
+            <div class="fun-card">
+
+                <h2>
+                    💡 Terraform Fact
+                </h2>
+
+                <p id="factText">
+                    Terraform doesn't create infrastructure
+                    by itself. Providers such as AWS translate
+                    Terraform instructions into API calls
+                    understood by cloud platforms.
+                </p>
+
+                <button id="factButton">
+                    🔄 Another Fact
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>
+            Built by <strong>Shaad Bangi</strong>
+            while learning Terraform 🚀
+        </p>
+
+        <p class="footer-small">
+            Infrastructure as Code • AWS • DevOps
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
