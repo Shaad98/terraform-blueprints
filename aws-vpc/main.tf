@@ -61,3 +61,12 @@ resource "aws_route_table_association" "public_sub" {
   route_table_id = aws_route_table.my_rt.id
   subnet_id = aws_subnet.public_subnet.id
 }
+
+resource "aws_instance" "myserver01" {
+  ami = "ami-0bdc7d025135d7b49"
+  instance_type = "t3.micro"
+  subnet_id = aws_subnet.public_subnet.id
+  tags = {
+    Name = "MyServer01"
+  }
+}
