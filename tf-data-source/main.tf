@@ -78,7 +78,21 @@ data "aws_security_group" "existing_sg" {
 }
 
 # --------------------------------------------------
-# Create EC2 instance
+# Fetch AWS Caller Identity
+# --------------------------------------------------
+
+data "aws_caller_identity" "current" {}
+
+# --------------------------------------------------
+# Fetch Available Availability Zones
+# --------------------------------------------------
+
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
+# --------------------------------------------------
+# Create EC2 Instance
 # --------------------------------------------------
 
 resource "aws_instance" "mywebserver01" {
@@ -97,7 +111,7 @@ resource "aws_instance" "mywebserver01" {
 }
 
 # --------------------------------------------------
-# Outputs
+# Outputs - AMI
 # --------------------------------------------------
 
 output "ami_id" {
@@ -107,6 +121,10 @@ output "ami_id" {
 output "ami_name" {
   value = data.aws_ami.amazon_linux.name
 }
+
+# --------------------------------------------------
+# Outputs - Existing AWS Infrastructure
+# --------------------------------------------------
 
 output "vpc_id" {
   value = data.aws_vpc.existing_vpc.id
@@ -120,6 +138,34 @@ output "security_group_id" {
   value = data.aws_security_group.existing_sg.id
 }
 
+# --------------------------------------------------
+# Outputs - EC2
+# --------------------------------------------------
+
 output "ec2_public_ip" {
   value = aws_instance.mywebserver01.public_ip
+}
+
+# --------------------------------------------------
+# Outputs - AWS Caller Identity
+# --------------------------------------------------
+
+output "aws_account_id" {
+  value = data.aws_caller_identity.current.account_id
+}
+
+output "aws_caller_arn" {
+  value = data.aws_caller_identity.current.arn
+}
+
+output "aws_caller_user_id" {
+  value = data.aws_caller_identity.current.user_id
+}
+
+# --------------------------------------------------
+# Outputs - Availability Zones
+# --------------------------------------------------
+
+output "availability_zones" {
+  value = data.aws_availability_zones.available.names
 }
