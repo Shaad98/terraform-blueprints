@@ -19,10 +19,11 @@ variable "aws_instance_type" {
   validation {
     condition = (
       var.aws_instance_type == "t2.micro" ||
-      var.aws_instance_type == "t3.micro"
+      var.aws_instance_type == "t3.micro" ||
+      var.aws_instance_type == "t2.medium"
     )
 
-    error_message = "Only t2.micro and t3.micro are allowed."
+    error_message = "Only t2.micro , t3.micro and t2.medium are allowed."
   }
 }
 
