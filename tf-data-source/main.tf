@@ -1,8 +1,8 @@
 terraform {
   required_providers {
     aws = {
-        source = "hashicorp/aws"
-        version = "~> 6.0"
+      source  = "hashicorp/aws"
+      version = "~> 6.0"
     }
   }
 }
@@ -11,23 +11,115 @@ provider "aws" {
   region = "us-east-1"
 }
 
-data "aws_ami" "get_ami" {
+# --------------------------------------------------
+# Fetch existing Amazon Linux 2023 AMI
+# --------------------------------------------------
+
+data "aws_ami" "amazon_linux" {
   most_recent = true
-  owners = [ "amazon" ]
+  owners      = ["amazon"]
+
+  filter {
+    name   = "name"
+    values = ["al2023-ami-*-x86_64"]
+  }
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
 }
 
-output "aws_ami" {
-    # Return Obj
-    value = data.aws_ami.get_ami
+# --------------------------------------------------
+# Fetch existing VPC
+# --------------------------------------------------
 
-    # value = data.aws_ami.get_ami.id
+data "aws_vpc" "existing_vpc" {
+  filter {
+    name   = "tag:Name"
+    values = ["my-vpc"]
+  }
 }
+
+# --------------------------------------------------
+# Fetch existing Subnet
+# --------------------------------------------------
+
+data "aws_subnet" "existing_subnet" {
+  vpc_id = data.aws_vpc.existing_vpc.id
+
+  filter {
+    name   = "tag:Name"
+    values = ["my-public-subnet"]
+  }
+}
+
+# --------------------------------------------------
+# Fetch existing Security Group
+# --------------------------------------------------
+
+data "aws_security_group" "existing_sg" {
+  vpc_id = data.aws_vpc.existing_vpc.id
+
+  filter {
+    name   = "tag:Name"
+    values = ["my-web-sg"]
+  }
+}
+
+# --------------------------------------------------
+# Create EC2 instance
+# --------------------------------------------------
 
 resource "aws_instance" "mywebserver01" {
-  ami = data.aws_ami.get_ami.id
+  ami           = data.aws_ami.amazon_linux.id
   instance_type = "t3.micro"
+
+  subnet_id = data.aws_subnet.existing_subnet.id
+
+  vpc_security_group_ids = [
+    data.aws_security_group.existing_sg.id
+  ]
 
   tags = {
     Name = "MyWebServer01"
   }
+}
+
+# --------------------------------------------------
+# Outputs
+# --------------------------------------------------
+
+output "ami_id" {
+  value = data.aws_ami.amazon_linux.id
+}
+
+output "ami_name" {
+  value = data.aws_ami.amazon_linux.name
+}
+
+output "vpc_id" {
+  value = data.aws_vpc.existing_vpc.id
+}
+
+output "subnet_id" {
+  value = data.aws_subnet.existing_subnet.id
+}
+
+output "security_group_id" {
+  value = data.aws_security_group.existing_sg.id
+}
+
+output "ec2_public_ip" {
+  value = aws_instance.mywebserver01.public_ip
 }
