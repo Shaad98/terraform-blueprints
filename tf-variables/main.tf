@@ -18,10 +18,8 @@ resource "aws_instance" "mywebserver01" {
 
   root_block_device {
     delete_on_termination = true
-    volume_size = 30
-    volume_type = "gp2"
+    volume_size = var.ec2_config.v_size
+    volume_type = var.ec2_config.v_type
   }
-  tags = {
-    Name = "MyWebServer01"
-  }
+  tags = merge(var.additional_tags,{Name="MyWebServer01"})
 }
